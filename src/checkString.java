@@ -6,14 +6,14 @@ public class checkString {
 				in = "doubleOp";
 				return in;
 			}
-			if(in.charAt(i) != '0' || in.charAt(i) != '1' ||  
-					in.charAt(i) != '2' ||  in.charAt(i) != '3' || 
-					in.charAt(i) != '4' ||  in.charAt(i) != '5' ||  
-					in.charAt(i) != '6' ||  in.charAt(i) != '7' || 
-					in.charAt(i) != '8' ||  in.charAt(i) != '9' || 
-					in.charAt(i) != '+' || in.charAt(i) != '-' || 
-					in.charAt(i) != '*' ||  in.charAt(i) != '/' 
-					||  in.charAt(i) !=  '^')
+			if(in.charAt(i) != '0' && in.charAt(i) != '1' &&  
+					in.charAt(i) != '2' &&  in.charAt(i) != '3' && 
+					in.charAt(i) != '4' &&  in.charAt(i) != '5' &&  
+					in.charAt(i) != '6' &&  in.charAt(i) != '7' && 
+					in.charAt(i) != '8' &&  in.charAt(i) != '9' && 
+					in.charAt(i) != '+' && in.charAt(i) != '-' && 
+					in.charAt(i) != '*' &&  in.charAt(i) != '/' 
+					&&  in.charAt(i) !=  '^')
 				{
 					in = "inputTypeIncorrect";
 					return in;
