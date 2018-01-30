@@ -28,7 +28,9 @@ public class checkString {
 	      		{
 	    	  		return true;
 	      		}
+	      else {	    	 
 	        return false;
+	      }
 	    }
 
 }

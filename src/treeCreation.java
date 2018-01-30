@@ -12,12 +12,7 @@ public class treeCreation {
 		        left = right = null;
 		    }
 		}
-	 
 
-	    // Utility function to do inorder traversal
-	 
-	    // Returns root of constructed tree for given
-	    // inCharArray expression
 	    Node constructTree(char inCharArray[]) {
 	        Stack<Node> st = new Stack<Node>();
 	        Node t = null, t1, t2;
@@ -52,8 +47,8 @@ public class treeCreation {
 	 
 	        //  only element will be root of expression
 	        // tree
-	        t = st.peek();
-	        st.pop();
+	       // t = st.peek();
+	       // st.pop();
 	 
 	        return t;
 	    }

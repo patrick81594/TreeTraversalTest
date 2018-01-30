@@ -8,8 +8,8 @@ static String input;
 		input = Work.Order(input);
 		char[] inCharArray = input.toCharArray();
 		System.out.print(input + "checks out");
-		treeCreation.Node root = tc.constructTree(inCharArray);
-		treeCreation.inorder(root);
+		treeCreation.Node root = tc.treeCreation.constructTree(inCharArray);
+		System.out.print(treeCreation.inorder(root));
 	}
 
 }
