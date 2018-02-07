@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JSeparator;
 import java.awt.GridLayout;
-import net.miginfocom.swing.MigLayout;
+//import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -16,6 +16,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.Stack;
 
+@SuppressWarnings("unused")
 public class Testt {
 
 	private JFrame frame;
@@ -94,14 +95,21 @@ public class Testt {
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				InOutLabel.setText(null);
+				preOutLabel.setText(null);
+				postOutLabel.setText(null);
 				input = Work.takeInput();
 
 				statusLabel.setText("Status: " + checkString.treatString(input));
 				stackArray = Work.Order(input);
-				treeCreation.Node root = tc.constructTree(stackArray, Work.countOpp(input));
-				InOutLabel.setText(treeCreation.inorder(root));
+				treeCreation.Node root = tc.constructTree(stackArray);
+				InOutLabel.setText(treeCreation.printInorder(root));
 		        System.out.println();
-				preOutLabel.setText(treeCreation.preOrder(root));
+				preOutLabel.setText(treeCreation.printPostorder(root));
+				//String preOrd = treeCreation.printPreorder(root);
+				postOutLabel.setText(null);
+				postOutLabel.setText(treeCreation.printPreorder(root));
+				treeCreation.PrintTree(root, 0);
 			}
 		});
 		btnNewButton.setBounds(45, 227, 89, 23);
@@ -131,5 +139,21 @@ public class Testt {
 		separator_2.setBounds(72, 168, 97, 6);
 		frame.getContentPane().add(separator_2);
 
+	}
+
+	protected String reverse(String printInorder) {
+		
+		StringBuilder sb = new StringBuilder();
+		String in = printInorder;
+		System.out.println("before: " + in);
+		char revArr[] = in.toCharArray();
+		int length = revArr.length;
+		System.out.println("length" + revArr.length);
+		for(int i = (length-1); i >= 0 ; i--){
+			sb.append(revArr[i]);
+		}
+		in = sb.toString();
+		System.out.println("after: " + in);
+		return in;
 	}
 }

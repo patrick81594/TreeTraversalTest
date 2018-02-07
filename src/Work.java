@@ -53,26 +53,28 @@ public class Work {
         int j;
         int i;
         int numOpp = countOpp(in);
-        int seenOpp = 0;
-
+        int seenAddSub = 0;
+        int seenExp = 0;
+        int seenMultDiv = 0;
 		for(i=0; i < in.length(); i++) {
-            j = i - 1;
+            System.out.println(i);
             if (in.charAt(i) == '+' || in.charAt(i) == '-') {
                 combStack.push(in.charAt(i));
-                seenOpp++;
-
+                
+                j= i-1;
+                if (seenAddSub < 1) {
+              }else {
+                	
                 while (in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^') {
                     combStack.push(Integer.parseInt(String.valueOf(in.charAt(j))));
                     j--;
                     if (j == -1) {
                         break;
                     }
-                
+                }
                 }
                 j = i + 1;
-                if (seenOpp != numOpp) {
-                }else {
-                	
+             	
                     while (j < in.length() && in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^') {
                         combStack.push(Integer.parseInt(String.valueOf(in.charAt(j))));
                         j++;
@@ -80,65 +82,67 @@ public class Work {
                             break;
                         }
                     }
-                }
+                    seenAddSub++;
             }
-		}
+		} 
 		for(i=0; i < in.length(); i++) {
-            j = i - 1;
+            System.out.println(i);
             if (in.charAt(i) == '*' || in.charAt(i) == '/') {
                 combStack.push(in.charAt(i));
-                seenOpp++;
-
+               
+                j= i-1;
+                if (seenMultDiv < 1) {
+              }else {
+                	
                 while (in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^') {
-
                     combStack.push(Integer.parseInt(String.valueOf(in.charAt(j))));
                     j--;
                     if (j == -1) {
                         break;
                     }
+                  }
                 }
-                
                 j = i + 1;
-                if (seenOpp != numOpp) {
-                }else {
-                    while (in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^' && j < in.length()) {
+
+                    while (j < in.length() && in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^') {
                         combStack.push(Integer.parseInt(String.valueOf(in.charAt(j))));
                         j++;
                         if (j >= in.length()) {
                             break;
                         }
                     }
-                }
-                }
-		}
-		for(i=0; i < in.length(); i++) {
-            j = i - 1;
+                    seenMultDiv++;
+            }
+		}  
+        for(i=0; i < in.length(); i++) {
+            System.out.println(i);
             if (in.charAt(i) == '^') {
                 combStack.push(in.charAt(i));
-                seenOpp++;               
+
+                j= i-1;
+                if (seenExp < 1) {
+              }else {
+                	
                 while (in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^') {
                     combStack.push(Integer.parseInt(String.valueOf(in.charAt(j))));
                     j--;
                     if (j == -1) {
                         break;
                     }
+                  }
                 }
-                
                 j = i + 1;
-                if (seenOpp != numOpp) {
-                }else {
-                    while (in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^' && j < in.length()) {
+                    while (j < in.length() && in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^') {
                         combStack.push(Integer.parseInt(String.valueOf(in.charAt(j))));
                         j++;
                         if (j >= in.length()) {
                             break;
                         }
                     }
-                }
-
+              seenExp++;
             }
-        }
-		
+		}
+
 
 
 
@@ -150,7 +154,7 @@ public class Work {
 		    for(int k = 0; k<fullSize; k++) {
 		    	System.out.println(combStack.peek());
 		    	test[k] = combStack.pop();
-              System.out.println(test[k] +" Please?");
+
             }
 
 
