@@ -56,7 +56,7 @@ public class Work {
         int seenAddSub = 0;
         int seenExp = 0;
         int seenMultDiv = 0;
-		for(i=0; i < in.length(); i++) {
+/*		for(i=0; i < in.length(); i++) {
             System.out.println(i);
             if (in.charAt(i) == '+' || in.charAt(i) == '-') {
                 combStack.push(in.charAt(i));
@@ -117,14 +117,14 @@ public class Work {
         for(i=0; i < in.length(); i++) {
             System.out.println(i);
             if (in.charAt(i) == '^') {
-                combStack.push(in.charAt(i));
+            	
 
                 j= i-1;
                 if (seenExp < 1) {
               }else {
                 	
                 while (in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^') {
-                    combStack.push(Integer.parseInt(String.valueOf(in.charAt(j))));
+                    treeCreation.constructTree(Integer.parseInt(String.valueOf(in.charAt(j))));
                     j--;
                     if (j == -1) {
                         break;
@@ -133,16 +133,17 @@ public class Work {
                 }
                 j = i + 1;
                     while (j < in.length() && in.charAt(j) != '/' && in.charAt(j) != '+' && in.charAt(j) != '-' && in.charAt(j) != '*' && in.charAt(j) != '^') {
-                        combStack.push(Integer.parseInt(String.valueOf(in.charAt(j))));
+                    	treeCreation.constructTree(Integer.parseInt(String.valueOf(in.charAt(j))));
                         j++;
                         if (j >= in.length()) {
                             break;
                         }
                     }
+                    treeCreation.constructTree(in.charAt(i));
               seenExp++;
             }
 		}
-
+*/
 
 
 
@@ -169,5 +170,6 @@ public class Work {
         }
         return count;
     }
+
 }
 

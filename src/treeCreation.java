@@ -9,42 +9,51 @@ import java.util.Stack;
 public class treeCreation {
 	static StringBuilder inSb = new StringBuilder();
 	static StringBuilder preSb = new StringBuilder();
-    static StringBuilder postSb = new StringBuilder();		
-    public  Node root;
-		class Node {
+    static StringBuilder postSb = new StringBuilder();	
+    static Stack<Node> st = new Stack<Node>();
 
-		    Object Value;
+		static class Node {
+
+		    char Value;
 		    Node left, right;
+			public Object inTree;
+		    
 		 
-		    Node(Node left, Object item, Node right) {
+		    Node(char item) {
 		        Value = item;
-		        this.left = left;
-		        this.right = right;
+		        left = null;
+		        right = null;
+		         inTree = null;
 		    }
 
 		}
-
-	    Node constructTree(Object[] array) {
-	        Stack<Node> st = new Stack<Node>();
+	    public static  Node root;
+	    static Node constructTree(char[] postArray) {
 	        
-	 		int size = array.length;
-	 		int oppCount = 0;
+	    	Node test, rightNode, leftNode;
+	 		int size = postArray.length;
+
 	        for (int i = 0; i < size; i++) {
   
 	            // If operation push into stack]
-				System.out.println("whats going to string: " + array[i].toString());
-	            if (checkString.isOperator(array[i])) {
+				System.out.println("whats going to string: " + postArray[i]);
+	            if (checkString.isOperator(postArray[i])) {
 	            	
 		
-	            		
-	            		   Node rightNode = st.pop();
-
-	                       Node leftNode = st.pop();
-	                       st.push(new Node(leftNode, array[i], rightNode));
+	            		   test = new treeCreation.Node(postArray[i]);
+	            		   rightNode = st.pop();
+	            		   rightNode.inTree = 'r';
+	                       leftNode = st.pop();
+	                       leftNode.inTree = 'l';
+	                       test.left = leftNode;
+	                       test.right = rightNode;
+	                       
+	                       st.push(test);
 	                
 	            } else // number
 	            {
-	            	st.push(new Node(null, array[i], null));
+	            	test = new Node(postArray[i]);
+                    st.push(test);
 	            }
 	        }
 	        System.out.println("root: " + st.peek().Value);
@@ -67,10 +76,12 @@ public class treeCreation {
 
 		static void PrintTree(Node root, int level)
 		{
+	
 		  if (root == null) return;
 		  PrintTree(root.right, level + 1);
 		  PrintSpace(level * kWidth);
 		  System.out.println(root.Value);
+
 		  PrintTree(root.left, level + 1);
 		}
 

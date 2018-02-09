@@ -15,6 +15,10 @@ import javax.swing.JLabel;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.Stack;
+import javax.swing.JTextArea;
+import java.awt.Point;
+import java.awt.Dimension;
+import javax.swing.JEditorPane;
 
 @SuppressWarnings("unused")
 public class Testt {
@@ -23,6 +27,8 @@ public class Testt {
 	static JTextField inputTxt;
 	static Object stackArray[];
 	static String input;
+	static JTextPane textPane = new JTextPane();
+	static JTextArea textArea = new JTextArea();
 	treeCreation tc = new treeCreation();
 	
 	/**
@@ -57,14 +63,16 @@ public class Testt {
 		frame.setBounds(100, 100, 458, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel statusLabel = new JLabel("Status: ");
+
 		statusLabel.setBounds(194, 200, 238, 50);
 		frame.getContentPane().add(statusLabel);
 		
 
 		
 		inputTxt = new JTextField();
+		inputTxt.setBounds(10, 196, 159, 20);
 		inputTxt.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent arg0) {
@@ -72,13 +80,17 @@ public class Testt {
 			}
 		});
 		inputTxt.setText("Enter an Expression");
-		inputTxt.setBounds(10, 196, 159, 20);
 		frame.getContentPane().add(inputTxt);
 		inputTxt.setColumns(10);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(194, 11, 238, 178);
 		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		
+		textArea.setBounds(10, 5, 218, 162);
+		panel.add(textArea);
 		
 		JLabel preOutLabel = new JLabel("");
 		preOutLabel.setBounds(72, 30, 97, 23);
@@ -93,16 +105,18 @@ public class Testt {
 		frame.getContentPane().add(postOutLabel);
 		
 		JButton btnNewButton = new JButton("Submit");
+		btnNewButton.setBounds(45, 227, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				InOutLabel.setText(null);
 				preOutLabel.setText(null);
 				postOutLabel.setText(null);
 				input = Work.takeInput();
-
 				statusLabel.setText("Status: " + checkString.treatString(input));
 				stackArray = Work.Order(input);
-				treeCreation.Node root = tc.constructTree(stackArray);
+				input = postFix.toPostfix(input);
+				char[] toTree = input.toCharArray();
+				treeCreation.Node root = treeCreation.constructTree(toTree);
 				InOutLabel.setText(treeCreation.printInorder(root));
 		        System.out.println();
 				preOutLabel.setText(treeCreation.printPostorder(root));
@@ -112,7 +126,6 @@ public class Testt {
 				treeCreation.PrintTree(root, 0);
 			}
 		});
-		btnNewButton.setBounds(45, 227, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JLabel prefixLabel = new JLabel("Prefix:");
@@ -138,6 +151,12 @@ public class Testt {
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBounds(72, 168, 97, 6);
 		frame.getContentPane().add(separator_2);
+		
+
+
+		textPane.setBounds(255, 184, 6, 20);
+
+		frame.getContentPane().add(textPane);
 
 	}
 
