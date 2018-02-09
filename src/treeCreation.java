@@ -11,7 +11,12 @@ public class treeCreation {
 	static StringBuilder preSb = new StringBuilder();
     static StringBuilder postSb = new StringBuilder();	
     static Stack<Node> st = new Stack<Node>();
-
+    
+    static void clearSB() {
+    	inSb = new StringBuilder();
+    	preSb = new StringBuilder();
+    	postSb = new StringBuilder();
+    }
 		static class Node {
 
 		    char Value;
@@ -68,20 +73,37 @@ public class treeCreation {
 
 	    
 		static int  kWidth = 6 ;
-		static void PrintSpace(int n)
+		static void PrintSpace(int n, Node root)
 		{
 		  for (int i = 0; i < n; ++i)
+		      if(i == (n-2)) {
+		    	  
+		      
+			  switch((char)root.inTree)
+		        {
+		            case 'l':
+		            System.out.print("\\");
+		            return;
+		            case 'r':
+		            System.out.print("/");
+		            return;
+
+
+		        }
+		      }
+		      else {
 			  System.out.print(" ");
-		}
+		      }
+}
 
 		static void PrintTree(Node root, int level)
 		{
 	
 		  if (root == null) return;
 		  PrintTree(root.right, level + 1);
-		  PrintSpace(level * kWidth);
-		  System.out.println(root.Value);
-
+		  PrintSpace(level * kWidth, root);
+		  System.out.println("(" + root.Value + ")");
+		  
 		  PrintTree(root.left, level + 1);
 		}
 

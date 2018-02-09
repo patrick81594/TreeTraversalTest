@@ -23,6 +23,7 @@ import javax.swing.JEditorPane;
 @SuppressWarnings("unused")
 public class Testt {
 
+	public static double result = 0;
 	private JFrame frame;
 	static JTextField inputTxt;
 	static Object stackArray[];
@@ -66,7 +67,7 @@ public class Testt {
 
 		JLabel statusLabel = new JLabel("Status: ");
 
-		statusLabel.setBounds(194, 200, 238, 50);
+		statusLabel.setBounds(194, 191, 238, 30);
 		frame.getContentPane().add(statusLabel);
 		
 
@@ -108,18 +109,17 @@ public class Testt {
 		btnNewButton.setBounds(45, 227, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InOutLabel.setText(null);
-				preOutLabel.setText(null);
-				postOutLabel.setText(null);
+				treeCreation.clearSB();
 				input = Work.takeInput();
-				statusLabel.setText("Status: " + checkString.treatString(input));
 				stackArray = Work.Order(input);
 				input = postFix.toPostfix(input);
 				char[] toTree = input.toCharArray();
 				treeCreation.Node root = treeCreation.constructTree(toTree);
+				statusLabel.setText("Status: " + checkString.treatString(input));
 				InOutLabel.setText(treeCreation.printInorder(root));
 		        System.out.println();
 				preOutLabel.setText(treeCreation.printPostorder(root));
+				Work.calculation(root);
 				//String preOrd = treeCreation.printPreorder(root);
 				postOutLabel.setText(null);
 				postOutLabel.setText(treeCreation.printPreorder(root));
@@ -157,6 +157,10 @@ public class Testt {
 		textPane.setBounds(255, 184, 6, 20);
 
 		frame.getContentPane().add(textPane);
+
+		JLabel resultLabel = new JLabel("Result: " + result);
+		resultLabel.setBounds(194, 215, 238, 30);
+		frame.getContentPane().add(resultLabel);
 
 	}
 

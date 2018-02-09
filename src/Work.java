@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Stack;
+
 import java.util.Arrays;
 
 public class Work {
@@ -170,6 +171,89 @@ public class Work {
         }
         return count;
     }
+    static double answer = 0;
+
+	static void calculation(treeCreation.Node node)
+    {
+        if (node == null)
+            return;
+ 
+        /* first recur on left child */
+        calculation(node.left);
+        switch(node.Value) {
+        	case '+':
+        	answer = answer + (checkValue(node.left.Value) + checkValue(node.right.Value));
+        	System.out.println("ans: " +answer);
+        	return;
+        	case '-':
+        	answer = answer + (checkValue(node.left.Value) - checkValue(node.right.Value));
+        	return;
+        	case '*':
+        		answer = answer + Math.multiplyExact(checkValue(node.left.Value), checkValue(node.right.Value));
+        		System.out.println("checkval: " +checkValue(node.left.Value));
+        	return;
+        	case '/':
+        		answer = answer + (checkValue(node.left.Value) / checkValue(node.right.Value));
+        	return;
+        	case '^':
+        	answer = answer + (Math.pow((int)node.left.Value, (int)node.right.Value));
+        	return;
+      
+        }
+        //System.out.println(answer);
+        calculation(node.right);
+        switch(node.Value) {
+    	case '+':
+    	answer = answer + (checkValue(node.left.Value) + checkValue(node.right.Value));
+    	System.out.println("ans: " +answer);
+    	return;
+    	case '-':
+    	answer = answer + (checkValue(node.left.Value) - checkValue(node.right.Value));
+    	return;
+    	case '*':
+    		answer = answer + Math.multiplyExact(checkValue(node.left.Value), checkValue(node.right.Value));
+    		System.out.println("checkval: " +checkValue(node.left.Value));
+    	return;
+    	case '/':
+    		answer = answer + (checkValue(node.left.Value) / checkValue(node.right.Value));
+    	return;
+    	case '^':
+    	answer = answer + (Math.pow((int)node.left.Value, (int)node.right.Value));
+    	return;
+  
+    }
+        Testt.result = answer;
+
+    }
+
+
+
+	private static int checkValue(char value) {
+		// TODO Auto-generated method stub
+		switch(value) {
+		case '0':
+			return 0;
+		case '1':
+			return 1;
+		case '2':
+			return 2;
+		case '3':
+			return 3;
+		case '4':
+			return 4;
+		case '5':
+			return 5;
+		case '6':
+			return 6;
+		case '7':
+			return 7;
+		case '8':
+			return 8;
+		case '9':
+			return 9;
+		}
+		return 0;
+	}
 
 }
 
