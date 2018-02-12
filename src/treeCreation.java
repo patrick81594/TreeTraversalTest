@@ -18,46 +18,57 @@ public class treeCreation {
     	postSb = new StringBuilder();
     }
 		static class Node {
-
-		    char Value;
+			char Value;
+		    int intValue;
 		    Node left, right;
 			public Object inTree;
-		    
+		    Boolean isOp;
 		 
 		    Node(char item) {
 		        Value = item;
 		        left = null;
 		        right = null;
 		         inTree = null;
+		         isOp = true;
+		    }
+		    Node(int item){
+		    	intValue = item;
+		        left = null;
+		        right = null;
+		         inTree = null;
+		    	isOp = false;
 		    }
 
 		}
 	    public static  Node root;
-	    static Node constructTree(char[] postArray) {
+	    static Node constructTree(Object[] toTree) {
 	        
 	    	Node test, rightNode, leftNode;
-	 		int size = postArray.length;
+	 		int size = toTree.length;
 
 	        for (int i = 0; i < size; i++) {
   
 	            // If operation push into stack]
-				System.out.println("whats going to string: " + postArray[i]);
-	            if (checkString.isOperator(postArray[i])) {
+				System.out.println("whats going to string: " + toTree[i]);
+	            if (checkString.isOperator(toTree[i].toString().charAt(0)) && toTree[i].toString().length() <= 1) {
 	            	
 		
-	            		   test = new treeCreation.Node(postArray[i]);
+	            		   test = new treeCreation.Node(toTree[i].toString().charAt(0));
 	            		   rightNode = st.pop();
 	            		   rightNode.inTree = 'r';
 	                       leftNode = st.pop();
 	                       leftNode.inTree = 'l';
 	                       test.left = leftNode;
 	                       test.right = rightNode;
-	                       
+	                       test.isOp = true;
 	                       st.push(test);
 	                
 	            } else // number
 	            {
-	            	test = new Node(postArray[i]);
+	            	System.out.println("where here at the number thing: " + Integer.parseInt(toTree[i].toString()) );
+	            	test = new Node(Integer.parseInt(toTree[i].toString()));
+	            	System.out.print("node value" + test.intValue);
+	            	test.isOp = false;
                     st.push(test);
 	            }
 	        }
@@ -102,8 +113,11 @@ public class treeCreation {
 		  if (root == null) return;
 		  PrintTree(root.right, level + 1);
 		  PrintSpace(level * kWidth, root);
-		  System.out.println("(" + root.Value + ")");
-		  
+		  if(root.isOp == true) {
+			  System.out.println("(" + root.Value + ")"); 
+		  }else {
+		  System.out.println("(" + root.intValue + ")");
+		  }
 		  PrintTree(root.left, level + 1);
 		}
 
@@ -115,8 +129,10 @@ public class treeCreation {
  
         /* first recur on left child */
         printInorder(node.left);
-        inSb.append(node.Value + "");
- 
+        if(node.isOp == true)
+        inSb.append(node.Value + " ");
+        else
+        	inSb.append(node.intValue + " ");
         /* now recur on right child */
         printInorder(node.right);
         String Sb = inSb.toString();
@@ -135,7 +151,10 @@ public class treeCreation {
         printPostorder(node.right);
  
         // now deal with the node
-        postSb.append(node.Value + "");
+        if(node.isOp == true)
+        postSb.append(node.Value + " ");
+        else
+        	postSb.append(node.intValue + " ");
         String Sb = postSb.toString();
         return Sb;
     }
@@ -145,7 +164,10 @@ public class treeCreation {
             return null;
  
         /* first print data of node */
-        preSb.append(node.Value + "");
+        if(node.isOp == true)
+        preSb.append(node.Value + " ");
+        else
+        	preSb.append(node.intValue + " ");
        
  
         /* then recur on left subtree */

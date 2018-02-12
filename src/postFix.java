@@ -2,9 +2,9 @@ import java.util.Stack;
 
 public class postFix {
 
-    static int precedence(char g)
+    static int precedence(String g)
     {
-        switch(g)
+        switch(g.charAt(0))
         {
             case '+':
             case '-':
@@ -21,40 +21,46 @@ public class postFix {
         return -1;
     }
 
-    static String toPostfix(String infix)
+    static Object[] toPostfix(String[] pieces)
     {
         Stack<Character> operator = new Stack<>();
-        StringBuilder postfix = new StringBuilder();
 
+        Stack<Object> postFix = new Stack<>();
+        Object[] postArr = new String[pieces.length];
 
-        for(int i = 0; i < infix.length(); i++)
+        for(int i = 0; i < pieces.length; i++)
         {
-            char g = infix.charAt(i);
+            String g = pieces[i];
 
-            if(Character.isLetterOrDigit(g))
+            if(g.toString().charAt(0) != '+' && g.toString().charAt(0) != '-' && g.toString().charAt(0) != '*' && g.toString().charAt(0) != '/' && g.toString().charAt(0) != '^' || g.toString().charAt(0) == '(')
             {
-                postfix.append(g);
+            	if(g.toString().charAt(0) == '(')
+                postFix.push("-" + Integer.parseInt(g.substring(1, g.length()-1)));
+            	else {
+            		postFix.push(Integer.parseInt(g));
+            	}
             }
 
             else
             {
-                while(!operator.isEmpty() && precedence(g) <= precedence(operator.peek()))
+                while(!operator.isEmpty() && precedence(g) <= precedence(operator.peek().toString()))
                 {
                     // if current is less than top of stack, remove from stack & add to string
-                    postfix.append(operator.pop());
+                    postFix.push(operator.pop());
                 }
                 // if not, push into operator stack
-                operator.push(g);
+                operator.push(g.charAt(0));
             }
         }
 
         // pop the remaining operators
         while(!operator.isEmpty())
         {
-            postfix.append(operator.pop());
+            postFix.push(operator.pop());
         }
-
+        postArr = postFix.toArray();
+        System.out.print("postArr" + postArr[0].toString() + postArr[1].toString());
         // convert back to string and return
-        return postfix.toString();
+        return postArr;
     }
 }

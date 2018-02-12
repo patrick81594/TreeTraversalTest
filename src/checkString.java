@@ -13,7 +13,7 @@ public class checkString {
 					in.charAt(i) == '8' ||  in.charAt(i) == '9' ||
 					in.charAt(i) == '+' || in.charAt(i) == '-' ||
 					in.charAt(i) == '*' ||  in.charAt(i) == '/'
-					||  in.charAt(i) ==  '^')
+					||  in.charAt(i) ==  '^' || in.charAt(i) == ' ' || in.charAt(i) == '(' || in.charAt(i) == ')')
 			{
 
 			}

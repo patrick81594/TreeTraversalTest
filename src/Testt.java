@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import java.awt.Point;
 import java.awt.Dimension;
 import javax.swing.JEditorPane;
+import javax.swing.JTree;
 
 @SuppressWarnings("unused")
 public class Testt {
@@ -31,6 +32,7 @@ public class Testt {
 	static JTextPane textPane = new JTextPane();
 	static JTextArea textArea = new JTextArea();
 	treeCreation tc = new treeCreation();
+	
 	
 	/**
 	 * Launch the application.
@@ -93,6 +95,10 @@ public class Testt {
 		textArea.setBounds(10, 5, 218, 162);
 		panel.add(textArea);
 		
+		JTree tree = new JTree();
+		tree.setBounds(10, 5, 218, 162);
+		panel.add(tree);
+		
 		JLabel preOutLabel = new JLabel("");
 		preOutLabel.setBounds(72, 30, 97, 23);
 		frame.getContentPane().add(preOutLabel);
@@ -105,25 +111,31 @@ public class Testt {
 		postOutLabel.setBounds(72, 145, 97, 23);
 		frame.getContentPane().add(postOutLabel);
 		
+		JLabel resultLabel = new JLabel("Result: " + result);
+		resultLabel.setBounds(194, 215, 238, 30);
+		frame.getContentPane().add(resultLabel);
+		
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.setBounds(45, 227, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				treeCreation.clearSB();
 				input = Work.takeInput();
-				stackArray = Work.Order(input);
-				input = postFix.toPostfix(input);
-				char[] toTree = input.toCharArray();
+				String[] pieces = input.split("\\s+");				
+				Object[] toTree = postFix.toPostfix(pieces);
 				treeCreation.Node root = treeCreation.constructTree(toTree);
 				statusLabel.setText("Status: " + checkString.treatString(input));
 				InOutLabel.setText(treeCreation.printInorder(root));
 		        System.out.println();
-				preOutLabel.setText(treeCreation.printPostorder(root));
-				Work.calculation(root);
-				//String preOrd = treeCreation.printPreorder(root);
-				postOutLabel.setText(null);
-				postOutLabel.setText(treeCreation.printPreorder(root));
+				preOutLabel.setText(treeCreation.printPreorder(root));
+				postOutLabel.setText(treeCreation.printPostorder(root));
 				treeCreation.PrintTree(root, 0);
+				Work.calculation(root);
+				resultLabel.setText("Result: " + result);
+
+
+
+
 			}
 		});
 		frame.getContentPane().add(btnNewButton);
@@ -158,9 +170,8 @@ public class Testt {
 
 		frame.getContentPane().add(textPane);
 
-		JLabel resultLabel = new JLabel("Result: " + result);
-		resultLabel.setBounds(194, 215, 238, 30);
-		frame.getContentPane().add(resultLabel);
+
+	
 
 	}
 
