@@ -121,11 +121,12 @@ public class Testt {
 				InOutLabel.setText(treeCreation.printInorder(root));
 		        System.out.println();
 				preOutLabel.setText(treeCreation.printPostorder(root));
+				treeCreation.PrintTree(root, 0);
 				Work.calculation(root);
 				//String preOrd = treeCreation.printPreorder(root);
 				postOutLabel.setText(null);
 				postOutLabel.setText(treeCreation.printPreorder(root));
-				treeCreation.PrintTree(root, 0);
+				
 			}
 		});
 		frame.getContentPane().add(btnNewButton);

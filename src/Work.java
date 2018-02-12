@@ -65,48 +65,55 @@ public class Work {
  
      
         calculation(node.left);
-        switch(node.Value.toString().charAt(0)) {
+        switch(node.Value) {
     	case '+':
-    	answer = answer + ((int)node.left.Value + (int)node.right.Value);
+    	answer = answer + (node.left.intValue + node.right.intValue);
     	System.out.println("ans: " +answer);
     	return;
     	case '-':
-    	answer = answer + ((int)node.left.Value - (int)node.right.Value);
+    	answer = answer + (node.left.intValue - node.right.intValue);
     	return;
     	case '*':
-    		answer = answer + Math.multiplyExact(Integer.parseInt(node.left.Value.toString()), Integer.parseInt(node.right.Value.toString()));
+    		System.out.print(node.left.intValue + " " + node.right.intValue + answer);
+    		answer = answer + Math.multiplyExact(node.left.intValue, (int)node.right.intValue);
+    		System.out.print(node.left.intValue + " " + node.right.intValue + answer);
 
     	return;
     	case '/':
-    		answer = answer + (Integer.parseInt(node.left.Value.toString()) / Integer.parseInt(node.right.Value.toString()));
+
+    		answer = answer + (node.left.intValue / node.right.intValue);
     	return;
     	case '^':
-    	answer = answer + (Math.pow((int)node.left.Value, (int)node.right.Value));
+    	answer = answer + (Math.pow((int)node.left.intValue, (int)node.right.intValue));
     	return;
   
     }
         //System.out.println(answer);
         calculation(node.right);
-        switch(node.Value.toString().charAt(0)) {
+        switch(node.Value) {
     	case '+':
-    	answer = answer + ((int)node.left.Value + (int)node.right.Value);
+    	answer = answer + (node.left.intValue + node.right.intValue);
     	System.out.println("ans: " +answer);
     	return;
     	case '-':
-    	answer = answer + ((int)node.left.Value - (int)node.right.Value);
+    	answer = answer + (node.left.intValue - node.right.intValue);
     	return;
-    	case '*':
-    		answer = answer + Math.multiplyExact((int)node.left.Value, (int)node.right.Value);
-
+    	case '*':{
+    		//System.out.println(node.left.intValue + " " + node.right.intValue + answer);
+    		answer = answer + Math.multiplyExact(node.left.intValue, (int)node.right.intValue);
+    		//System.out.println(node.left.intValue + " " + node.right.intValue + answer);
+    	
     	return;
+    	}
     	case '/':
-    		answer = answer + ((int)node.left.Value / (int)node.right.Value);
+    		answer = answer + (node.left.intValue / node.right.intValue);
     	return;
     	case '^':
-    	answer = answer + (Math.pow((int)node.left.Value, (int)node.right.Value));
+    	answer = answer + (Math.pow(node.left.intValue, node.right.intValue));
     	return;
   
     }
+        System.out.print("The answer is: ");
         Testt.result = answer;
 
     }

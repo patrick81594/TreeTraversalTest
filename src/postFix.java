@@ -33,9 +33,14 @@ public class postFix {
             String g = pieces[i];
             System.out.println("g value: " + g.charAt(0));
 
-            if(g.charAt(0) != '+' && g.charAt(0) != '-' && g.charAt(0) != '/' && g.charAt(0) != '*' && g.charAt(0) != '^')
+            if(g.charAt(0) != '+' && g.charAt(0) != '-' && g.charAt(0) != '/' && g.charAt(0) != '*' && g.charAt(0) != '^' || g.charAt(0) == '(')
             {
-            	postExp.push(Integer.parseInt(g));
+            	if(g.charAt(0) == '('){	
+            	postExp.push(Integer.parseInt("-" + g.substring(1, g.length()-1)));
+            	}
+            	else{
+            		postExp.push(Integer.parseInt(g));
+            	}
             }
 
             else
@@ -62,7 +67,7 @@ public class postFix {
         postExp.toArray(postFix);
 
         // convert back to string and return
-        System.out.println("length of prefix array: " + postFix[0] + postFix[1]  + postFix[2] + postFix[3] + postFix[4] );
+
         return postFix;
     }
 }

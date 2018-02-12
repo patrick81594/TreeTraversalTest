@@ -19,19 +19,30 @@ public class treeCreation {
     }
 		static class Node {
 
-		    Object Value;
+		    char Value;
 		    Node left, right;
 			public Object inTree;
+			int intValue;
+			boolean isOp;
 		    
 		 
-		    Node(Object postArray) {
+		    Node(char postArray) {
 		        Value = postArray;
 		        left = null;
 		        right = null;
 		         inTree = null;
+		         isOp = true;
+		    }
+		    Node(int postArray) {
+		        intValue = postArray;
+		        left = null;
+		        right = null;
+		         inTree = null;
+		         isOp = false;
 		    }
 
 		}
+		
 	    public static  Node root;
 	    static Node constructTree(Object[] postArray) {
 	        
@@ -43,7 +54,7 @@ public class treeCreation {
 	            // If operation push into stack]
 				System.out.println("whats going to string: " + postArray[i]);
 				System.out.println(postArray[i].toString().charAt(0));
-	            if (checkString.isOperator(postArray[i].toString().charAt(0))) {
+	            if (checkString.isOperator(postArray[i].toString().charAt(0)) && postArray[i].toString().length() <= 1) {
 	            	
 	            		System.out.println(postArray[i].toString().charAt(0));
 	            		
@@ -59,7 +70,7 @@ public class treeCreation {
 	                
 	            } else // number
 	            {
-	            	test = new Node(postArray[i]);
+	            	test = new Node(Integer.parseInt(postArray[i].toString()));
                     st.push(test);
 	            }
 	        }
@@ -104,8 +115,12 @@ public class treeCreation {
 		  if (root == null) return;
 		  PrintTree(root.right, level + 1);
 		  PrintSpace(level * kWidth, root);
+		  if(root.isOp){
 		  System.out.println("(" + root.Value + ")");
-		  
+		  }
+		  else{
+			  System.out.println("(" + root.intValue + ")"); 
+		  }
 		  PrintTree(root.left, level + 1);
 		}
 
