@@ -6,36 +6,37 @@ import java.util.Arrays;
 public class Work {
 	static String input;
 	static String checked;
-	public static Scanner scan = new Scanner(System.in);
+
 	
 
 
 	public static String takeInput() {
 		try{
-		while(input != "doubleOp" || input != "inputTypeIncorrect"){
+		while(input != "doubleOp" && input != "inputTypeIncorrect"){
 			input = Testt.inputTxt.getText();
 			System.out.print(input);
 			checked = checkString.treatString(input);
 
 			if(checked == "doubleOp"){
 				System.out.println("Function has more than one operation concurrently. Please enter a valid function. ");
+				Testt.inputTxt.setText(null);
 				takeInput();
 				break;
 			}
 			if(checked == "inputTypeIncorrect"){
 				System.out.println("Function has an invalid character please enter any valid function i.e. (7*3+2-8)");
+				Testt.inputTxt.setText(null);
+				Testt.statusLabel.setText("Status: Function has an invalid character please enter any valid function i.e. (7*3+2-8)");
 				takeInput();
 				break;
 			}
 			if(checked == "goodInput"){
 				break;
 			}
+			
+		}
 
-		}
-		if (checked == "doubleOp" || checked == "inputTypeIncorrect") {
-			takeInput();
-		}
-		scan.close();
+
 		return input;
 		}
 		catch(IllegalArgumentException IAE){
@@ -138,7 +139,8 @@ public class Work {
         calculation(node.right);
        
         System.out.println("answer" + answer);
-        Testt.result = answer;
+        
+        answer = 0;
 
     }
 

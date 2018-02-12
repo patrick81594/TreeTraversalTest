@@ -83,7 +83,7 @@ public class treeCreation {
 
 
 	    
-		static int  kWidth = 6 ;
+		static int  kWidth = 8 ;
 		static void PrintSpace(int n, Node root)
 		{
 		  for (int i = 0; i < n; ++i)
@@ -93,17 +93,17 @@ public class treeCreation {
 			  switch((char)root.inTree)
 		        {
 		            case 'l':
-		            System.out.print("\\");
+		            Testt.textArea.append("\\");
 		            return;
 		            case 'r':
-		            System.out.print("/");
+		            Testt.textArea.append("/");
 		            return;
 
 
 		        }
 		      }
 		      else {
-			  System.out.print(" ");
+		    	  Testt.textArea.append(" ");
 		      }
 }
 
@@ -114,9 +114,9 @@ public class treeCreation {
 		  PrintTree(root.right, level + 1);
 		  PrintSpace(level * kWidth, root);
 		  if(root.isOp == true) {
-			  System.out.println("(" + root.Value + ")"); 
+			  Testt.textArea.append("(" + root.Value + ")" + "\n"); 
 		  }else {
-		  System.out.println("(" + root.intValue + ")");
+			  Testt.textArea.append("(" + root.intValue + ")" + "\n");
 		  }
 		  PrintTree(root.left, level + 1);
 		}

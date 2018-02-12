@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.awt.Dimension;
 import javax.swing.JEditorPane;
 import javax.swing.JTree;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("unused")
 public class Testt {
@@ -29,11 +30,9 @@ public class Testt {
 	static JTextField inputTxt;
 	static Object stackArray[];
 	static String input;
-	static JTextPane textPane = new JTextPane();
-	static JTextArea textArea = new JTextArea();
+	public static JTextArea textArea = new JTextArea();
 	treeCreation tc = new treeCreation();
-	
-	
+	static JLabel statusLabel = new JLabel("Status: ");
 	/**
 	 * Launch the application.
 	 */
@@ -63,19 +62,14 @@ public class Testt {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 458, 300);
+		frame.setBounds(100, 100, 429, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-
-		JLabel statusLabel = new JLabel("Status: ");
-
-		statusLabel.setBounds(194, 191, 238, 30);
-		frame.getContentPane().add(statusLabel);
+		frame.getContentPane().setLayout(new MigLayout("", "[61px][1px][97px][238px,grow]", "[33px][9px][6px][31px][23px][6px][26px][23px][21px][30px][grow][6px][23px]"));
+		frame.getContentPane().add(statusLabel, "cell 3 9,grow");
 		
 
 		
 		inputTxt = new JTextField();
-		inputTxt.setBounds(10, 196, 159, 20);
 		inputTxt.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent arg0) {
@@ -83,42 +77,33 @@ public class Testt {
 			}
 		});
 		inputTxt.setText("Enter an Expression");
-		frame.getContentPane().add(inputTxt);
+		frame.getContentPane().add(inputTxt, "cell 0 9 3 1,growx,aligny center");
 		inputTxt.setColumns(10);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(194, 11, 238, 178);
-		frame.getContentPane().add(panel);
+		frame.getContentPane().add(panel, "cell 3 0 1 9,grow");
 		panel.setLayout(null);
 		
 		
-		textArea.setBounds(10, 5, 218, 162);
+		textArea.setBounds(0, 0, 235, 179);
 		panel.add(textArea);
 		
-		JTree tree = new JTree();
-		tree.setBounds(10, 5, 218, 162);
-		panel.add(tree);
-		
 		JLabel preOutLabel = new JLabel("");
-		preOutLabel.setBounds(72, 30, 97, 23);
-		frame.getContentPane().add(preOutLabel);
+		frame.getContentPane().add(preOutLabel, "cell 2 0,alignx left,aligny center");
 		
 		JLabel InOutLabel = new JLabel("");
-		InOutLabel.setBounds(72, 90, 97, 23);
-		frame.getContentPane().add(InOutLabel);
+		frame.getContentPane().add(InOutLabel, "cell 2 4,grow");
 		
 		JLabel postOutLabel = new JLabel("");
-		postOutLabel.setBounds(72, 145, 97, 23);
-		frame.getContentPane().add(postOutLabel);
-		
+		frame.getContentPane().add(postOutLabel, "cell 2 7,grow");
+
 		JLabel resultLabel = new JLabel("Result: " + result);
-		resultLabel.setBounds(194, 215, 238, 30);
-		frame.getContentPane().add(resultLabel);
+		frame.getContentPane().add(resultLabel, "cell 3 12,growx,aligny center");
 		
 		JButton btnNewButton = new JButton("Submit");
-		btnNewButton.setBounds(45, 227, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textArea.setText("");
 				treeCreation.clearSB();
 				input = Work.takeInput();
 				String[] pieces = input.split("\\s+");				
@@ -138,37 +123,27 @@ public class Testt {
 
 			}
 		});
-		frame.getContentPane().add(btnNewButton);
+		frame.getContentPane().add(btnNewButton, "cell 0 12 3 1,alignx center,aligny top");
 		
 		JLabel prefixLabel = new JLabel("Prefix:");
-		prefixLabel.setBounds(31, 30, 40, 23);
-		frame.getContentPane().add(prefixLabel);
+		frame.getContentPane().add(prefixLabel, "cell 0 0,alignx center,aligny bottom");
 		
 		JLabel InfixLabel = new JLabel("Infix:");
-		InfixLabel.setBounds(31, 90, 32, 23);
-		frame.getContentPane().add(InfixLabel);
+		frame.getContentPane().add(InfixLabel, "cell 0 4,alignx center,growy");
 		
 		JLabel postfixLabel = new JLabel("Postfix: ");
-		postfixLabel.setBounds(31, 145, 40, 23);
-		frame.getContentPane().add(postfixLabel);
+		frame.getContentPane().add(postfixLabel, "cell 0 7,alignx right,growy");
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(72, 113, 97, 6);
-		frame.getContentPane().add(separator_1);
+		frame.getContentPane().add(separator_1, "cell 2 5,grow");
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(72, 53, 97, 6);
-		frame.getContentPane().add(separator);
+		frame.getContentPane().add(separator, "cell 2 2,grow");
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(72, 168, 97, 6);
-		frame.getContentPane().add(separator_2);
+		frame.getContentPane().add(separator_2, "cell 2 8,growx,aligny top");
 		
 
-
-		textPane.setBounds(255, 184, 6, 20);
-
-		frame.getContentPane().add(textPane);
 
 
 	

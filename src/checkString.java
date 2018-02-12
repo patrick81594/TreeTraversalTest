@@ -21,6 +21,10 @@ public class checkString {
 					in = "inputTypeIncorrect";
 					return in; }
 		    }
+		if(isOperator(in.charAt(0)) || isOperator(in.charAt(in.length()-1))) {
+			in = "inputTypeIncorrect";
+			return in; 
+		}
 		    in = "goodInput";
 		return in;		
 	}
