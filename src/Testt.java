@@ -110,11 +110,13 @@ public class Testt {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				treeCreation.clearSB();
+				
+				
 				input = Work.takeInput();
-				stackArray = Work.Order(input);
-				input = postFix.toPostfix(input);
-				char[] toTree = input.toCharArray();
-				treeCreation.Node root = treeCreation.constructTree(toTree);
+				String[] pieces =  input.split("\\s+");			
+				Object[] post = postFix.toPostfix(pieces);
+				//char[] toTree = input.toCharArray();
+				treeCreation.Node root = treeCreation.constructTree(post);
 				statusLabel.setText("Status: " + checkString.treatString(input));
 				InOutLabel.setText(treeCreation.printInorder(root));
 		        System.out.println();

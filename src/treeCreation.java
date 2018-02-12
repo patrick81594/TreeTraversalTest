@@ -19,13 +19,13 @@ public class treeCreation {
     }
 		static class Node {
 
-		    char Value;
+		    Object Value;
 		    Node left, right;
 			public Object inTree;
 		    
 		 
-		    Node(char item) {
-		        Value = item;
+		    Node(Object postArray) {
+		        Value = postArray;
 		        left = null;
 		        right = null;
 		         inTree = null;
@@ -33,7 +33,7 @@ public class treeCreation {
 
 		}
 	    public static  Node root;
-	    static Node constructTree(char[] postArray) {
+	    static Node constructTree(Object[] postArray) {
 	        
 	    	Node test, rightNode, leftNode;
 	 		int size = postArray.length;
@@ -42,10 +42,12 @@ public class treeCreation {
   
 	            // If operation push into stack]
 				System.out.println("whats going to string: " + postArray[i]);
-	            if (checkString.isOperator(postArray[i])) {
+				System.out.println(postArray[i].toString().charAt(0));
+	            if (checkString.isOperator(postArray[i].toString().charAt(0))) {
 	            	
-		
-	            		   test = new treeCreation.Node(postArray[i]);
+	            		System.out.println(postArray[i].toString().charAt(0));
+	            		
+	            		   test = new treeCreation.Node(postArray[i].toString().charAt(0));
 	            		   rightNode = st.pop();
 	            		   rightNode.inTree = 'r';
 	                       leftNode = st.pop();

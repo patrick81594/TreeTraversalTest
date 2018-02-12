@@ -2,9 +2,9 @@ import java.util.Stack;
 
 public class postFix {
 
-    static int precedence(char g)
+    static int precedence(String g)
     {
-        switch(g)
+        switch(g.charAt(0))
         {
             case '+':
             case '-':
@@ -21,40 +21,48 @@ public class postFix {
         return -1;
     }
 
-    static String toPostfix(String infix)
+    static Object[] toPostfix(String[] pieces)
     {
-        Stack<Character> operator = new Stack<>();
+        Stack<Object> operator = new Stack<>();
         StringBuilder postfix = new StringBuilder();
-
-
-        for(int i = 0; i < infix.length(); i++)
+        Stack<Object> postExp = new Stack<>();
+        Object [] postFix = new Object[pieces.length];
+        int leftOff = 0;
+        for(int i = 0; i < pieces.length; i++)
         {
-            char g = infix.charAt(i);
+            String g = pieces[i];
+            System.out.println("g value: " + g.charAt(0));
 
-            if(Character.isLetterOrDigit(g))
+            if(g.charAt(0) != '+' && g.charAt(0) != '-' && g.charAt(0) != '/' && g.charAt(0) != '*' && g.charAt(0) != '^')
             {
-                postfix.append(g);
+            	postExp.push(Integer.parseInt(g));
             }
 
             else
             {
-                while(!operator.isEmpty() && precedence(g) <= precedence(operator.peek()))
+                while(!operator.isEmpty() && precedence(g) <= precedence(operator.peek().toString()))
                 {
                     // if current is less than top of stack, remove from stack & add to string
-                    postfix.append(operator.pop());
+                	System.out.println("Whats going on with operations:" + operator.peek().toString().charAt(0));
+                    postExp.push(operator.pop().toString().charAt(0));
+                    System.out.println("in the array" + postFix[i] + "i value: " + i);
                 }
                 // if not, push into operator stack
-                operator.push(g);
+                operator.push(g.toString().charAt(0));
             }
+            leftOff = i;
         }
 
-        // pop the remaining operators
+        
         while(!operator.isEmpty())
         {
-            postfix.append(operator.pop());
+        	postExp.push(operator.pop().toString().charAt(0));
+            leftOff++;
         }
+        postExp.toArray(postFix);
 
         // convert back to string and return
-        return postfix.toString();
+        System.out.println("length of prefix array: " + postFix[0] + postFix[1]  + postFix[2] + postFix[3] + postFix[4] );
+        return postFix;
     }
 }
