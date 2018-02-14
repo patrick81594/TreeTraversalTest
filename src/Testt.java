@@ -32,7 +32,7 @@ public class Testt {
 	static String input;
 	public static JTextArea textArea = new JTextArea();
 	treeCreation tc = new treeCreation();
-	static JLabel statusLabel = new JLabel("Status: ");
+	static JTextArea statusLabel = new JTextArea("Status: ");
 	/**
 	 * Launch the application.
 	 */
@@ -65,6 +65,7 @@ public class Testt {
 		frame.setBounds(100, 100, 429, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[61px][1px][97px][238px,grow]", "[33px][9px][6px][31px][23px][6px][26px][23px][21px][30px][grow][6px][23px]"));
+		statusLabel.setEditable(false);
 		frame.getContentPane().add(statusLabel, "cell 3 9,grow");
 		
 
@@ -83,13 +84,14 @@ public class Testt {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, "cell 3 0 1 9,grow");
 		panel.setLayout(null);
+		textArea.setEditable(false);
 		
 		
 		textArea.setBounds(0, 0, 235, 179);
 		panel.add(textArea);
 		
 		JLabel preOutLabel = new JLabel("");
-		frame.getContentPane().add(preOutLabel, "cell 2 0,alignx left,aligny center");
+		frame.getContentPane().add(preOutLabel, "cell 2 0,grow");
 		
 		JLabel InOutLabel = new JLabel("");
 		frame.getContentPane().add(InOutLabel, "cell 2 4,grow");
@@ -97,7 +99,8 @@ public class Testt {
 		JLabel postOutLabel = new JLabel("");
 		frame.getContentPane().add(postOutLabel, "cell 2 7,grow");
 
-		JLabel resultLabel = new JLabel("Result: " + result);
+		JTextArea resultLabel = new JTextArea("Result: " + result);
+		resultLabel.setEditable(false);
 		frame.getContentPane().add(resultLabel, "cell 3 12,growx,aligny center");
 		
 		JButton btnNewButton = new JButton("Submit");
@@ -106,10 +109,11 @@ public class Testt {
 				textArea.setText("");
 				treeCreation.clearSB();
 				input = Work.takeInput();
+				statusLabel.setText("Status: " + checkString.treatString(input));
 				String[] pieces = input.split("\\s+");				
 				Object[] toTree = postFix.toPostfix(pieces);
 				treeCreation.Node root = treeCreation.constructTree(toTree);
-				statusLabel.setText("Status: " + checkString.treatString(input));
+				
 				InOutLabel.setText(treeCreation.printInorder(root));
 		        System.out.println();
 				preOutLabel.setText(treeCreation.printPreorder(root));

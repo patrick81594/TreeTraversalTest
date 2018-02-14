@@ -2,7 +2,7 @@
 public class checkString {
 	public static String treatString(String in){
 		for(int i = 0; i < in.length()-1; i++){
-			if(i >= 1 && in.charAt(i) == in.charAt(i-1)){
+			if(i >= 2 && in.charAt(i) == in.charAt(i-2) && in.charAt(i) != ' ' && in.charAt(i- 2) != ' '){
 				in = "doubleOp";
 				return in;
 			}
